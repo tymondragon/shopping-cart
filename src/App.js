@@ -27,14 +27,22 @@ class App extends Component {
   }
 
   addToCart = (newItem) => {
+    let cart = this.state.shoppingCart
     let array = this.state.products.filter(product => newItem.products === product.name)
     let productObj = {
         product: array[0],
-        quantity: newItem.quantity,
+        quantity: newItem.quantity
       }
-    this.state.shoppingCart.push(productObj)
-    this.setState({shoppingCart:this.state.shoppingCart})
-    console.log(this.state.shoppingCart)
+
+    let cartFiltered = cart.filter(item=>item.product.name === newItem.products)
+    if (cartFiltered.length === 1) {
+        cartFiltered[0].quantity = Number(cartFiltered[0].quantity) + Number(newItem.quantity)
+        this.setState({shoppingCart:cart})
+    }
+    else {
+        cart = [...cart, productObj]
+        this.setState({shoppingCart:cart})
+      }
   }
 
   render() {

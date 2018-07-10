@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react' 
 
 export const products = [
   { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },

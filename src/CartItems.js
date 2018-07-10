@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react' 
 import CartItem from './CartItem.js'
 
 const CartItems = ({ items }) => {
-  let itemList = items.map(item => <CartItem key={ item.id } item={ item } />);
+  let itemList = items.map((item, i) => <CartItem key={ i } item={ item } />)
   return <div className="container">
     <h1>Cart Items</h1>
     <div className="list-group">
@@ -23,4 +23,4 @@ export const cartItemsList = [
   { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
   { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
 ]
-export default CartItems;
+export default CartItems

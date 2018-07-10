@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import CartHeader from './CartHeader.js';
-import CartFooter from './CartFooter.js';
-import CartItems, { cartItemsList } from './CartItems.js';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import CartHeader from './CartHeader.js'
+import CartFooter from './CartFooter.js'
+import CartItems, { cartItemsList } from './CartItems.js'
 import { products } from './products.js'
 import AddItem from './AddItem.js'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state= { products: [
+    this.state= {
+      products: [
       { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
       { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 },
       { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 },
@@ -20,27 +21,32 @@ class App extends Component {
       { id: 46, name: 'Intelligent Leather Clock', priceInCents: 2999 },
       { id: 47, name: 'Ergonomic Bronze Lamp', priceInCents: 40000 },
       { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 },
-    ]}
+      ],
+      shoppingCart : []
+    }
   }
 
   addToCart = (newItem) => {
     let array = this.state.products.filter(product => newItem.products === product.name)
     let productObj = {
-        id:1,
-        product: result[0],
-        quantity: newItem.quantity
+        product: array[0],
+        quantity: newItem.quantity,
+      }
+    this.state.shoppingCart.push(productObj)
+    this.setState({shoppingCart:this.state.shoppingCart})
+    console.log(this.state.shoppingCart)
   }
 
   render() {
     return (
       <div>
         <CartHeader />
-        <CartItems items= { cartItemsList }/>
+        <CartItems items={ this.state.shoppingCart }/>
         <AddItem products={ this.state.products } addToCart={ this.addToCart }/>
         <CartFooter copyright=" 2018"/>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

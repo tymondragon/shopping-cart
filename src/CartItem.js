@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react' 
 
 const CartItem = ( { item } )=> {
   return  <div className="list-group-item">
@@ -10,4 +10,4 @@ const CartItem = ( { item } )=> {
           </div>
 }
 
-export default CartItem;
+export default CartItem 

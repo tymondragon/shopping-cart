@@ -22,8 +22,7 @@ class App extends Component {
       { id: 47, name: 'Ergonomic Bronze Lamp', priceInCents: 40000 },
       { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 },
       ],
-      shoppingCart : [],
-      total : 0
+      shoppingCart : []
     }
   }
 
@@ -53,7 +52,7 @@ class App extends Component {
     let cart= this.state.shoppingCart
     let total = 0
     for (let i = 0; i < cart.length; i++) {
-      total += (cart[i].quantity * cart[i].product.priceInCents)
+      total += cart[i].quantity * cart[i].product.priceInCents
       }
     return total
     }

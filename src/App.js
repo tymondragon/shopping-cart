@@ -3,7 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import CartHeader from './CartHeader.js'
 import CartFooter from './CartFooter.js'
-import CartItems, { cartItemsList } from './CartItems.js'
+import CartItems from './CartItems.js'
 import { products } from './products.js'
 import AddItem from './AddItem.js'
 
@@ -22,18 +22,21 @@ class App extends Component {
       { id: 47, name: 'Ergonomic Bronze Lamp', priceInCents: 40000 },
       { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 },
       ],
-      shoppingCart : []
+      shoppingCart : [],
+      total : 0
     }
   }
 
   addToCart = (newItem) => {
     let cart = this.state.shoppingCart
-    let array = this.state.products.filter(product => newItem.products === product.name)
+    let quantity = newItem.quantity === NaN ? 0 : newItem.quantity
+    let productInfo = this.state.products.filter(product => newItem.products === product.name).reduce(current=>current)
     let productObj = {
-        product: array[0],
-        quantity: newItem.quantity
+        product: { ...productInfo,
+          priceInCents: (productInfo.priceInCents/100).toFixed(2)
+        },
+        quantity: quantity
       }
-
     let cartFiltered = cart.filter(item=>item.product.name === newItem.products)
     if (cartFiltered.length === 1) {
         cartFiltered[0].quantity = Number(cartFiltered[0].quantity) + Number(newItem.quantity)
@@ -42,19 +45,30 @@ class App extends Component {
     else {
         cart = [...cart, productObj]
         this.setState({shoppingCart:cart})
+        console.log(cart)
       }
-  }
 
-  render() {
-    return (
-      <div>
-        <CartHeader />
-        <CartItems items={ this.state.shoppingCart }/>
-        <AddItem products={ this.state.products } addToCart={ this.addToCart }/>
-        <CartFooter copyright=" 2018"/>
-      </div>
-    )
   }
+    calculate = () =>{
+    let cart= this.state.shoppingCart
+    let total = 0
+    for (let i = 0; i < cart.length; i++) {
+      total += (cart[i].quantity * cart[i].product.priceInCents)
+      }
+    return total
+    }
+
+
+    render() {
+      return (
+        <div>
+          <CartHeader />
+          <CartItems items={ this.state.shoppingCart }/>
+          <AddItem products={ this.state.products } addToCart={ this.addToCart } total={ this.calculate }/>
+          <CartFooter copyright=" 2018"/>
+        </div>
+      )
+    }
 }
 
 export default App

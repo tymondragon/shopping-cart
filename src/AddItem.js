@@ -33,7 +33,7 @@ class AddItem extends Component {
                   Quantity:
                   <input type="number"  onChange={ this.onChange } className="quantity"/>
                 </label>
-                <label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref" placeholder="First Select and option...">Products:</label>
+                <label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref" placeholder="First Select an option...">Products:</label>
                 <select className="products" onChange={ this.onChange }>
                   { productItems }
                 </select>
